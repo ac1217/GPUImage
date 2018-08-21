@@ -1,6 +1,7 @@
 #import "SimpleVideoFilterViewController.h"
 #import <AssetsLibrary/ALAssetsLibrary.h>
 
+
 @implementation SimpleVideoFilterViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -22,17 +23,17 @@
 {
     [super viewDidLoad];
     
-    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionBack];
+    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPresetHigh cameraPosition:AVCaptureDevicePositionFront];
 //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionFront];
 //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
 //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1920x1080 cameraPosition:AVCaptureDevicePositionBack];
 
     videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
-    videoCamera.horizontallyMirrorFrontFacingCamera = NO;
-    videoCamera.horizontallyMirrorRearFacingCamera = NO;
+    videoCamera.horizontallyMirrorFrontFacingCamera = YES;
+//    videoCamera.horizontallyMirrorRearFacingCamera = NO;
 
     filter = [[GPUImageSepiaFilter alloc] init];
-  
+    filter1 = [[NSClassFromString(@"GPUImageMirrorFilter") alloc] init];
 //    filter = [[GPUImageTiltShiftFilter alloc] init];
 //    [(GPUImageTiltShiftFilter *)filter setTopFocusLevel:0.65];
 //    [(GPUImageTiltShiftFilter *)filter setBottomFocusLevel:0.85];
@@ -45,6 +46,7 @@
 //    GPUImageRotationFilter *rotationFilter = [[GPUImageRotationFilter alloc] initWithRotation:kGPUImageRotateRightFlipVertical];
     
     [videoCamera addTarget:filter];
+    [filter addTarget:filter1];
     GPUImageView *filterView = (GPUImageView *)self.view;
 //    filterView.fillMode = kGPUImageFillModeStretch;
 //    filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
@@ -59,8 +61,8 @@
 //    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(640.0, 480.0)];
 //    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(720.0, 1280.0)];
 //    movieWriter = [[GPUImageMovieWriter alloc] initWithMovieURL:movieURL size:CGSizeMake(1080.0, 1920.0)];
-    [filter addTarget:movieWriter];
-    [filter addTarget:filterView];
+    [filter1 addTarget:movieWriter];
+    [filter1 addTarget:filterView];
     
     [videoCamera startCameraCapture];
     
@@ -80,11 +82,12 @@
 //        [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOn];
 //        [videoCamera.inputCamera unlockForConfiguration];
 
+        /*
         double delayInSeconds = 10.0;
         dispatch_time_t stopTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(stopTime, dispatch_get_main_queue(), ^(void){
             
-            [filter removeTarget:movieWriter];
+            [filter1 removeTarget:movieWriter];
             videoCamera.audioEncodingTarget = nil;
             [movieWriter finishRecording];
             NSLog(@"Movie completed");
@@ -112,7 +115,7 @@
 //            [videoCamera.inputCamera lockForConfiguration:nil];
 //            [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOff];
 //            [videoCamera.inputCamera unlockForConfiguration];
-        });
+        });*/
     });
 }
 

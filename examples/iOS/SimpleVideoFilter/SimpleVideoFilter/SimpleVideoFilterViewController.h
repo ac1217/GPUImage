@@ -5,6 +5,7 @@
 {
     GPUImageVideoCamera *videoCamera;
     GPUImageOutput<GPUImageInput> *filter;
+    GPUImageOutput<GPUImageInput> *filter1;
     GPUImageMovieWriter *movieWriter;
 }
 
