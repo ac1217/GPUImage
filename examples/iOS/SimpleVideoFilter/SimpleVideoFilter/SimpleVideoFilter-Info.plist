@@ -26,6 +26,12 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>sdfs</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>sdfsdf</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>dfs</string>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UIPrerenderedIcon</key>
@@ -47,11 +53,5 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>sdfs</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>sdfsdf</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>dfs</string>
 </dict>
 </plist>

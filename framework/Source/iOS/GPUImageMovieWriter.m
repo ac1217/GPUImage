@@ -47,6 +47,8 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
 
 - (void)renderAtInternalSizeUsingFramebuffer:(GPUImageFramebuffer *)inputFramebufferToUse;
 
+@property (nonatomic,strong) NSMutableArray *audioSampleBufferCache;
+
 @end
 
 @implementation GPUImageMovieWriter
@@ -67,6 +69,14 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
 
 #pragma mark -
 #pragma mark Initialization and teardown
+
+- (NSMutableArray *)audioSampleBufferCache
+{
+    if (!_audioSampleBufferCache) {
+        _audioSampleBufferCache = @[].mutableCopy;
+    }
+    return _audioSampleBufferCache;
+}
 
 - (id)initWithMovieURL:(NSURL *)newMovieURL size:(CGSize)newSize;
 {
@@ -308,6 +318,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         {
             audioEncodingIsFinished = YES;
             [assetWriterAudioInput markAsFinished];
+            [self.audioSampleBufferCache removeAllObjects];
         }
         [assetWriter cancelWriting];
     });
@@ -336,8 +347,11 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         }
         if( assetWriter.status == AVAssetWriterStatusWriting && ! audioEncodingIsFinished )
         {
+            [self writeAudioSampleBufferFromCache];
             audioEncodingIsFinished = YES;
             [assetWriterAudioInput markAsFinished];
+            [self.audioSampleBufferCache removeAllObjects];
+            
         }
 #if (!defined(__IPHONE_6_0) || (__IPHONE_OS_VERSION_MAX_ALLOWED < __IPHONE_6_0))
         // Not iOS 6 SDK
@@ -370,24 +384,24 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         return;
     }
     
-//    if (_hasAudioTrack && CMTIME_IS_VALID(startTime))
-    if (_hasAudioTrack)
+    if (_hasAudioTrack && CMTIME_IS_VALID(startTime))
+//    if (_hasAudioTrack)
     {
         CFRetain(audioBuffer);
 
         CMTime currentSampleTime = CMSampleBufferGetOutputPresentationTimeStamp(audioBuffer);
         
-        if (CMTIME_IS_INVALID(startTime))
-        {
-            runSynchronouslyOnContextQueue(_movieWriterContext, ^{
-                if ((audioInputReadyCallback == NULL) && (assetWriter.status != AVAssetWriterStatusWriting))
-                {
-                    [assetWriter startWriting];
-                }
-                [assetWriter startSessionAtSourceTime:currentSampleTime];
-                startTime = currentSampleTime;
-            });
-        }
+//        if (CMTIME_IS_INVALID(startTime))
+//        {
+//            runSynchronouslyOnContextQueue(_movieWriterContext, ^{
+//                if ((audioInputReadyCallback == NULL) && (assetWriter.status != AVAssetWriterStatusWriting))
+//                {
+//                    [assetWriter startWriting];
+//                }
+//                [assetWriter startSessionAtSourceTime:currentSampleTime];
+//                startTime = currentSampleTime;
+//            });
+//        }
 
         if (!assetWriterAudioInput.readyForMoreMediaData && _encodingLiveVideo)
         {
@@ -466,8 +480,17 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
             }
             else if(assetWriter.status == AVAssetWriterStatusWriting)
             {
-                if (![assetWriterAudioInput appendSampleBuffer:audioBuffer])
-                    NSLog(@"Problem appending audio buffer at time: %@", CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, currentSampleTime)));
+                
+                if (audioBuffer) {
+                    
+                    [self.audioSampleBufferCache insertObject:(__bridge id _Nonnull)(audioBuffer) atIndex:0];
+                    
+                }
+                
+                [self writeAudioSampleBufferFromCache];
+                
+//                if (![assetWriterAudioInput appendSampleBuffer:audioBuffer])
+//                    NSLog(@"Problem appending audio buffer at time: %@", CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, currentSampleTime)));
             }
             else
             {
@@ -492,6 +515,32 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         }
     }
 }
+
+
+- (void)writeAudioSampleBufferFromCache
+{
+    CMSampleBufferRef sb;
+    while ((sb = (__bridge CMSampleBufferRef)(self.audioSampleBufferCache.lastObject)) != NULL) {
+        
+        CMTime time =  CMSampleBufferGetPresentationTimeStamp(sb);
+        
+        if (CMTimeCompare(time, previousFrameTime) == 1) {
+            
+            break;
+        }
+        
+        BOOL success = [assetWriterAudioInput appendSampleBuffer:sb];
+        
+        if (!success){
+            
+            NSLog(@"audio sampleBuffer写入失败");
+        }
+        
+        [self.audioSampleBufferCache removeLastObject];
+        
+    }
+}
+
 
 - (void)enableSynchronizationCallbacks;
 {
@@ -800,6 +849,13 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
             {
                 if (![assetWriterPixelBufferInput appendPixelBuffer:pixel_buffer withPresentationTime:frameTime])
                     NSLog(@"Problem appending pixel buffer at time: %@", CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, frameTime)));
+                
+                if (_delegate && [_delegate respondsToSelector:@selector(movieRecordingUpdated:)])
+                {
+                    
+                    [_delegate movieRecordingUpdated:self.duration];
+                }
+                
             }
             else
             {

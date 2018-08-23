@@ -33,7 +33,8 @@
 //    videoCamera.horizontallyMirrorRearFacingCamera = NO;
 
     filter = [[GPUImageSepiaFilter alloc] init];
-    filter1 = [[NSClassFromString(@"GPUImageMirrorFilter") alloc] init];
+    filter1 = [[GPUImageMirrorFilter alloc] init];
+    
 //    filter = [[GPUImageTiltShiftFilter alloc] init];
 //    [(GPUImageTiltShiftFilter *)filter setTopFocusLevel:0.65];
 //    [(GPUImageTiltShiftFilter *)filter setBottomFocusLevel:0.85];
@@ -65,7 +66,7 @@
     [filter1 addTarget:filterView];
     
     [videoCamera startCameraCapture];
-    
+    /**/
     double delayToStartRecording = 0.5;
     dispatch_time_t startTime = dispatch_time(DISPATCH_TIME_NOW, delayToStartRecording * NSEC_PER_SEC);
     dispatch_after(startTime, dispatch_get_main_queue(), ^(void){
@@ -82,7 +83,7 @@
 //        [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOn];
 //        [videoCamera.inputCamera unlockForConfiguration];
 
-        /*
+        
         double delayInSeconds = 10.0;
         dispatch_time_t stopTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(stopTime, dispatch_get_main_queue(), ^(void){
@@ -115,7 +116,7 @@
 //            [videoCamera.inputCamera lockForConfiguration:nil];
 //            [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOff];
 //            [videoCamera.inputCamera unlockForConfiguration];
-        });*/
+        });
     });
 }
 

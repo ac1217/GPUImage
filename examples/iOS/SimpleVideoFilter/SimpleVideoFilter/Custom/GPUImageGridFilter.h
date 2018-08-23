@@ -13,7 +13,7 @@
     GLint lengthUniform;
 }
 
-// Brightness ranges from -1.0 to 1.0, with 0.0 as the normal level
+// length x length 网格滤镜，边长
 @property(readwrite, nonatomic) NSInteger length;
 
 

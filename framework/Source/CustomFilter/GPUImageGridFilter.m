@@ -39,6 +39,8 @@ NSString *const kGPUImageGridFragmentShaderString = SHADER_STRING
 {
     self = [super initWithFragmentShaderFromString:kGPUImageGridFragmentShaderString];
     if (self) {
+        
+        lengthUniform = [filterProgram uniformIndex:@"length"];
         self.length = 2;
     }
     return self;
