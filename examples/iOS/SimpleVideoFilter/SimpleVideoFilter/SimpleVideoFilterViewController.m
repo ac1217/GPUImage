@@ -27,7 +27,7 @@
 //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset640x480 cameraPosition:AVCaptureDevicePositionFront];
 //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1280x720 cameraPosition:AVCaptureDevicePositionBack];
 //    videoCamera = [[GPUImageVideoCamera alloc] initWithSessionPreset:AVCaptureSessionPreset1920x1080 cameraPosition:AVCaptureDevicePositionBack];
-
+    [videoCamera addAudioInputsAndOutputs];
     videoCamera.outputImageOrientation = UIInterfaceOrientationPortrait;
     videoCamera.horizontallyMirrorFrontFacingCamera = YES;
 //    videoCamera.horizontallyMirrorRearFacingCamera = NO;
@@ -67,13 +67,17 @@
     
     [videoCamera startCameraCapture];
     /**/
-    double delayToStartRecording = 0.5;
+    double delayToStartRecording = 5;
     dispatch_time_t startTime = dispatch_time(DISPATCH_TIME_NOW, delayToStartRecording * NSEC_PER_SEC);
     dispatch_after(startTime, dispatch_get_main_queue(), ^(void){
         NSLog(@"Start recording");
         
         videoCamera.audioEncodingTarget = movieWriter;
-        [movieWriter startRecording];
+        
+//        dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        
+            [movieWriter startRecording];
+//        });
 
 //        NSError *error = nil;
 //        if (![videoCamera.inputCamera lockForConfiguration:&error])
@@ -84,7 +88,7 @@
 //        [videoCamera.inputCamera unlockForConfiguration];
 
         
-        double delayInSeconds = 10.0;
+        double delayInSeconds = 30;
         dispatch_time_t stopTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
         dispatch_after(stopTime, dispatch_get_main_queue(), ^(void){
             
@@ -92,7 +96,7 @@
             videoCamera.audioEncodingTarget = nil;
             [movieWriter finishRecording];
             NSLog(@"Movie completed");
-            
+            /*
             ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
             if ([library videoAtPathIsCompatibleWithSavedPhotosAlbum:movieURL])
             {
@@ -111,7 +115,7 @@
                          }
                      });
                  }];
-            }
+            }*/
             
 //            [videoCamera.inputCamera lockForConfiguration:nil];
 //            [videoCamera.inputCamera setTorchMode:AVCaptureTorchModeOff];
