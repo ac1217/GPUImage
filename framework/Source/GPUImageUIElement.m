@@ -92,8 +92,9 @@
 	CGContextTranslateCTM(imageContext, 0.0f, layerPixelSize.height);
     CGContextScaleCTM(imageContext, layer.contentsScale, -layer.contentsScale);
     //        CGContextSetBlendMode(imageContext, kCGBlendModeCopy); // From Technical Q&A QA1708: http://developer.apple.com/library/ios/#qa/qa1708/_index.html
-    
+   
     [layer renderInContext:imageContext];
+    
     
     CGContextRelease(imageContext);
     CGColorSpaceRelease(genericRGBColorspace);

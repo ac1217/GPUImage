@@ -812,6 +812,10 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
         [self.delegate didCompletePlayingMovie];
     }
     self.delegate = nil;
+    
+    !self.didCompletePlayingMovieCallback ? : self.didCompletePlayingMovieCallback();
+    self.didCompletePlayingMovieCallback = nil;
+    
 }
 
 - (void)cancelProcessing

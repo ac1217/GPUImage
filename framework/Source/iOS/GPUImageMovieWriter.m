@@ -748,8 +748,6 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
 - (void)newFrameReadyAtTime:(CMTime)frameTime atIndex:(NSInteger)textureIndex;
 {
     
-    
-    
     if (!isRecording || _paused)
     {
         [firstInputFramebuffer unlock];
@@ -802,7 +800,9 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
 
     GPUImageFramebuffer *inputFramebufferForBlock = firstInputFramebuffer;
     glFinish();
-
+    
+    
+    
     runAsynchronouslyOnContextQueue(_movieWriterContext, ^{
         if (!assetWriterVideoInput.readyForMoreMediaData && _encodingLiveVideo)
         {
@@ -865,6 +865,8 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
                     
                     [_delegate movieRecordingUpdated:self.duration];
                 }
+                
+                !self.movieRecordingUpdatedCallback ? : self.movieRecordingUpdatedCallback(self.duration);
 //                videoTime = frameTime;
                 
             }

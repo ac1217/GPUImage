@@ -9,24 +9,25 @@
 #import "GPUImageGridFilter.h"
 NSString *const kGPUImageGridFragmentShaderString = SHADER_STRING
 (
+ 
+ precision highp float;
  varying highp vec2 textureCoordinate;
  
  uniform sampler2D inputImageTexture;
- uniform lowp float length;
+ uniform vec2 size;
  
  void main()
  {
      
      
-     lowp float pre = 1.0 / length;
+     lowp float preX = 1.0 / size.x;
+     lowp float preY = 1.0 / size.y;
      
-     lowp float mx = mod(textureCoordinate.x, pre);
-     lowp float my = mod(textureCoordinate.y, pre);
+     lowp float mx = mod(textureCoordinate.x, preX);
+     lowp float my = mod(textureCoordinate.y, preY);
      
+     gl_FragColor = texture2D(inputImageTexture, vec2(mx * size.x, my * size.y));
      
-     
-     
-     gl_FragColor = texture2D(inputImageTexture, vec2(mx, my)*length);
  }
  );
 @interface GPUImageGridFilter()
@@ -40,7 +41,7 @@ NSString *const kGPUImageGridFragmentShaderString = SHADER_STRING
     self = [super initWithFragmentShaderFromString:kGPUImageGridFragmentShaderString];
     if (self) {
         
-        lengthUniform = [filterProgram uniformIndex:@"length"];
+        sizeUniform = [filterProgram uniformIndex:@"size"];
         self.length = 2;
     }
     return self;
@@ -50,6 +51,14 @@ NSString *const kGPUImageGridFragmentShaderString = SHADER_STRING
 {
     _length = length;
     
-    [self setFloat:(float)_length forUniform:lengthUniform program:filterProgram];
+    self.size = CGSizeMake(_length, _length);
 }
+
+- (void)setSize:(CGSize)size
+{
+    _size = size;
+    [self setSize:size forUniform:sizeUniform program:filterProgram];
+    
+}
+
 @end

@@ -10,10 +10,12 @@
 @interface GPUImageGridFilter : GPUImageFilter
 {
     GLint lengthUniform;
+    GLint sizeUniform;
 }
 
 // length x length 网格滤镜，边长
 @property(readwrite, nonatomic) NSInteger length;
 
+@property(readwrite, nonatomic) CGSize size;
 
 @end

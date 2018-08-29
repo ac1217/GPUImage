@@ -175,5 +175,10 @@ FOUNDATION_EXPORT const unsigned char GPUImageFrameworkVersionString[];
 #import <GPUImage/GPUImageColourFASTFeatureDetector.h>
 #import <GPUImage/GPUImageColourFASTSamplingOperation.h>
 #import <GPUImage/GPUImageSolarizeFilter.h>
+
+// custom
 #import <GPUImage/GPUImageMirrorFilter.h>
 #import <GPUImage/GPUImageGridFilter.h>
+#import <GPUImage/GPUImageTwoInputSplitScreenFilter.h>
+#import <GPUImage/GPUImageTwoInputGridFilter.h>
+

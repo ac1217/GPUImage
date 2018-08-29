@@ -167,6 +167,11 @@
 #import "GPUImageColorConversion.h"
 #import "GPUImageColourFASTFeatureDetector.h"
 #import "GPUImageColourFASTSamplingOperation.h"
+
+// custom
 #import "GPUImageMirrorFilter.h"
 #import "GPUImageGridFilter.h"
+#import "GPUImageTwoInputSplitScreenFilter.h"
+#import "GPUImageTwoInputGridFilter.h"
+
 
