@@ -2,6 +2,11 @@
 #import <AssetsLibrary/ALAssetsLibrary.h>
 
 
+@interface SimpleVideoFilterViewController()
+
+@property (nonatomic,strong) GPUImageMovie *movie;
+@end
+
 @implementation SimpleVideoFilterViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -54,6 +59,18 @@
     
     // Record a movie for 10 s and store it in /Documents, visible via iTunes file sharing
     
+    
+    NSURL *url = [[NSBundle mainBundle] URLForResource:@"57436" withExtension:@"mp4"];
+    GPUImageMovie *movie = [[GPUImageMovie alloc] initWithURL:url];
+    movie.shouldRepeat = YES;
+    movie.playAtActualSpeed = YES;
+    
+    [movie addTarget:filterView];
+    
+    [movie startProcessing];
+    
+    self.movie = movie;
+    return;
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
     unlink([pathToMovie UTF8String]); // If a file already exists, AVAssetWriter won't let you record new frames, so delete the old movie
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
@@ -160,6 +177,12 @@
     }
     videoCamera.outputImageOrientation = orient;
 
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    self.movie.paused = !self.movie.isPaused;
+    
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

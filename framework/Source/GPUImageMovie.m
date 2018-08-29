@@ -149,6 +149,34 @@
     //}
 }
 
+- (void)setPaused:(BOOL)paused
+{
+    _paused = paused;
+    
+    if (self.playerItem) {
+        
+#if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+        // Restart display link.
+        [displayLink setPaused:paused];
+#else
+        if (paused) {
+            
+            CVDisplayLinkStart(displayLink);
+        }else {
+            
+            CVDisplayLinkStop(displayLink);
+        }
+#endif
+        
+        return;
+    }
+    
+    if (synchronizedMovieWriter) {
+        synchronizedMovieWriter.paused = paused;
+    }
+    
+}
+
 #pragma mark -
 #pragma mark Movie processing
 
@@ -266,6 +294,7 @@
     if (synchronizedMovieWriter != nil)
     {
         [synchronizedMovieWriter setVideoInputReadyCallback:^{
+           
             BOOL success = [weakSelf readNextVideoFrameFromOutput:readerVideoTrackOutput];
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
             return success;
@@ -273,6 +302,7 @@
         }];
 
         [synchronizedMovieWriter setAudioInputReadyCallback:^{
+           
             BOOL success = [weakSelf readNextAudioSampleFromOutput:readerAudioTrackOutput];
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
             return success;
@@ -286,6 +316,10 @@
     {
         while (reader.status == AVAssetReaderStatusReading && (!_shouldRepeat || keepLooping))
         {
+            if (self.isPaused) {
+                continue;
+            }
+            
                 [weakSelf readNextVideoFrameFromOutput:readerVideoTrackOutput];
 
             if ( (readerAudioTrackOutput) && (!audioEncodingIsFinished) )
@@ -820,6 +854,7 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 
 - (void)cancelProcessing
 {
+    
     if (reader) {
         [reader cancelReading];
     }
