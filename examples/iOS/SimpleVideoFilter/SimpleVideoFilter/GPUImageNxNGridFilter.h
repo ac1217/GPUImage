@@ -9,8 +9,7 @@
 #import <GPUImage/GPUImageFramework.h>
 
 @interface GPUImageNxNGridFilter : GPUImageFilter
+@property(nonatomic,assign)float step;
 -(instancetype)initWithGridX:(NSInteger)x y:(NSInteger)y;
--(void)setGridX:(NSInteger)x y:(NSInteger)y count:(NSInteger)count;
-
-@property (nonatomic,assign) float step;
+-(void)setGridX:(NSInteger)x y:(NSInteger)y count:(NSInteger)count alpha:(float)alpha;
 @end
