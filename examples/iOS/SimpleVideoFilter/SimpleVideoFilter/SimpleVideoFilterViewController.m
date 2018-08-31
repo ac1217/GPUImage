@@ -5,6 +5,7 @@
 @interface SimpleVideoFilterViewController()
 
 @property (nonatomic,strong) GPUImageMovie *movie;
+@property (nonatomic,strong) GPUImageGridFilter *gridFilter;
 @end
 
 @implementation SimpleVideoFilterViewController
@@ -42,13 +43,18 @@
     filter = [[GPUImageSepiaFilter alloc] init];
     filter1 = [[GPUImageMirrorFilter alloc] init];
     
-    GPUImageSplitScreenFilter *splitScreenFilter = [[GPUImageSplitScreenFilter alloc] init];
-    splitScreenFilter.ratio = 0.8;
-    [videoCamera addTarget:splitScreenFilter];
+//    GPUImageSplitScreenFilter *splitScreenFilter = [[GPUImageSplitScreenFilter alloc] init];
+//    splitScreenFilter.ratio = 0.8;
+    
+    GPUImageGridFilter *gridFilter = [[GPUImageGridFilter alloc] init];
+    gridFilter.size = CGSizeMake(3, 3);
+    gridFilter.transition = 0.75;
+    [videoCamera addTarget:gridFilter];
+    self.gridFilter = gridFilter;
     
     GPUImageView *filterView = (GPUImageView *)self.view;
 
-    [splitScreenFilter addTarget:filterView];
+    [gridFilter addTarget:filterView];
     
     return;
     
@@ -193,6 +199,8 @@
 - (IBAction)updateSliderValue:(id)sender
 {
     [(GPUImageSepiaFilter *)filter setIntensity:[(UISlider *)sender value]];
+    
+    [self.gridFilter setTransition:[(UISlider *)sender value]];
 }
 
 @end

@@ -9,8 +9,9 @@
 
 @interface GPUImageGridFilter : GPUImageFilter
 {
-    GLint lengthUniform;
+    
     GLint sizeUniform;
+    GLint transitionUniform;
 }
 
 // length x length 网格滤镜，边长
@@ -18,4 +19,6 @@
 
 @property(readwrite, nonatomic) CGSize size;
 
+// 过渡值
+@property(readwrite, nonatomic) float transition;
 @end
