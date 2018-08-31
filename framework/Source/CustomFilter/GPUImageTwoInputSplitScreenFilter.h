@@ -7,11 +7,12 @@
 //
 
 #import "GPUImageTwoInputFilter.h"
+#import "GPUImageSplitScreenFilter.h"
 
-typedef enum : NSUInteger {
-    GPUImageSplitScreenDirectionHorizontal,
-    GPUImageSplitScreenDirectionVertical
-} GPUImageSplitScreenDirection;
+//typedef enum : NSUInteger {
+//    GPUImageSplitScreenDirectionHorizontal,
+//    GPUImageSplitScreenDirectionVertical
+//} GPUImageSplitScreenDirection;
 
 @interface GPUImageTwoInputSplitScreenFilter : GPUImageTwoInputFilter
 {

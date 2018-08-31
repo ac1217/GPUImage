@@ -175,6 +175,7 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 
 - (void)setInputFramebufferForTarget:(id<GPUImageInput>)target atIndex:(NSInteger)inputTextureIndex;
 {
+    
     [target setInputFramebuffer:[self framebufferForOutput] atIndex:inputTextureIndex];
 }
 
@@ -207,6 +208,8 @@ void reportAvailableMemoryForGPUImage(NSString *tag)
 - (void)addTarget:(id<GPUImageInput>)newTarget;
 {
     NSInteger nextAvailableTextureIndex = [newTarget nextAvailableTextureIndex];
+    
+    
     [self addTarget:newTarget atTextureLocation:nextAvailableTextureIndex];
     
     if ([newTarget shouldIgnoreUpdatesToThisTarget])

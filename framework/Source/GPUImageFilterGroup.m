@@ -104,8 +104,10 @@
 
 - (void)setInputFramebuffer:(GPUImageFramebuffer *)newInputFramebuffer atIndex:(NSInteger)textureIndex;
 {
+    
     for (GPUImageOutput<GPUImageInput> *currentFilter in _initialFilters)
     {
+        
         [currentFilter setInputFramebuffer:newInputFramebuffer atIndex:textureIndex];
     }
 }
@@ -117,7 +119,9 @@
 //        return [[_initialFilters objectAtIndex:0] nextAvailableTextureIndex];
 //    }
     
-    return 0;
+    return [_initialFilters.firstObject nextAvailableTextureIndex];
+    
+//    return 0;
 }
 
 - (void)setInputSize:(CGSize)newSize atIndex:(NSInteger)textureIndex;

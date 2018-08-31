@@ -110,9 +110,17 @@ NSString *const kGPUImageTwoInputTextureVertexShaderString = SHADER_STRING
 	glBindTexture(GL_TEXTURE_2D, [firstInputFramebuffer texture]);
 	glUniform1i(filterInputTextureUniform, 2);	
     
-    glActiveTexture(GL_TEXTURE3);
-    glBindTexture(GL_TEXTURE_2D, [secondInputFramebuffer texture]);
-    glUniform1i(filterInputTextureUniform2, 3);
+//    if (secondInputFramebuffer) {
+    
+        glActiveTexture(GL_TEXTURE3);
+        glBindTexture(GL_TEXTURE_2D, [secondInputFramebuffer texture]);
+        glUniform1i(filterInputTextureUniform2, 3);
+//    }else {
+//
+//        glActiveTexture(GL_TEXTURE3);
+//        glBindTexture(GL_TEXTURE_2D, [firstInputFramebuffer texture]);
+//        glUniform1i(filterInputTextureUniform2, 3);
+//    }
     
     glVertexAttribPointer(filterPositionAttribute, 2, GL_FLOAT, 0, 0, vertices);
 	glVertexAttribPointer(filterTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, textureCoordinates);
@@ -145,6 +153,7 @@ NSString *const kGPUImageTwoInputTextureVertexShaderString = SHADER_STRING
 
 - (void)setInputFramebuffer:(GPUImageFramebuffer *)newInputFramebuffer atIndex:(NSInteger)textureIndex;
 {
+    
     if (textureIndex == 0)
     {
         firstInputFramebuffer = newInputFramebuffer;

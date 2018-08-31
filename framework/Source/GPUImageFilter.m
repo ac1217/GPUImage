@@ -576,6 +576,7 @@ NSString *const kGPUImagePassthroughFragmentShaderString = SHADER_STRING
 
 - (void)setInputFramebuffer:(GPUImageFramebuffer *)newInputFramebuffer atIndex:(NSInteger)textureIndex;
 {
+    
     firstInputFramebuffer = newInputFramebuffer;
     [firstInputFramebuffer lock];
 }

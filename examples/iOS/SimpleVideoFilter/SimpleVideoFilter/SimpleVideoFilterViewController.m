@@ -37,40 +37,41 @@
     videoCamera.horizontallyMirrorFrontFacingCamera = YES;
 //    videoCamera.horizontallyMirrorRearFacingCamera = NO;
 
+    [videoCamera startCameraCapture];
+    
     filter = [[GPUImageSepiaFilter alloc] init];
     filter1 = [[GPUImageMirrorFilter alloc] init];
     
-//    filter = [[GPUImageTiltShiftFilter alloc] init];
-//    [(GPUImageTiltShiftFilter *)filter setTopFocusLevel:0.65];
-//    [(GPUImageTiltShiftFilter *)filter setBottomFocusLevel:0.85];
-//    [(GPUImageTiltShiftFilter *)filter setBlurSize:1.5];
-//    [(GPUImageTiltShiftFilter *)filter setFocusFallOffRate:0.2];
+    GPUImageSplitScreenFilter *splitScreenFilter = [[GPUImageSplitScreenFilter alloc] init];
+    splitScreenFilter.ratio = 0.8;
+    [videoCamera addTarget:splitScreenFilter];
     
-//    filter = [[GPUImageSketchFilter alloc] init];
-//    filter = [[GPUImageColorInvertFilter alloc] init];
-//    filter = [[GPUImageSmoothToonFilter alloc] init];
-//    GPUImageRotationFilter *rotationFilter = [[GPUImageRotationFilter alloc] initWithRotation:kGPUImageRotateRightFlipVertical];
-    
-    [videoCamera addTarget:filter];
-    [filter addTarget:filter1];
     GPUImageView *filterView = (GPUImageView *)self.view;
-//    filterView.fillMode = kGPUImageFillModeStretch;
-//    filterView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill;
+
+    [splitScreenFilter addTarget:filterView];
     
-    // Record a movie for 10 s and store it in /Documents, visible via iTunes file sharing
-    
+    return;
     
     NSURL *url = [[NSBundle mainBundle] URLForResource:@"57436" withExtension:@"mp4"];
     GPUImageMovie *movie = [[GPUImageMovie alloc] initWithURL:url];
     movie.shouldRepeat = YES;
     movie.playAtActualSpeed = YES;
-    
-    [movie addTarget:filterView];
+//    [movie addTarget:group];
     
     [movie startProcessing];
+    NSURL *url1 = [[NSBundle mainBundle] URLForResource:@"57436" withExtension:@"mp4"];
+    GPUImageMovie *movie1 = [[GPUImageMovie alloc] initWithURL:url1];
+    movie1.shouldRepeat = YES;
+    movie1.playAtActualSpeed = YES;
+//    [movie1 addTarget:group];
+    
+    [movie1 startProcessing];
     
     self.movie = movie;
-    return;
+    
+//    [group addTarget:filterView];
+    
+    
     NSString *pathToMovie = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/Movie.m4v"];
     unlink([pathToMovie UTF8String]); // If a file already exists, AVAssetWriter won't let you record new frames, so delete the old movie
     NSURL *movieURL = [NSURL fileURLWithPath:pathToMovie];
@@ -82,7 +83,6 @@
     [filter1 addTarget:movieWriter];
     [filter1 addTarget:filterView];
     
-    [videoCamera startCameraCapture];
     /**/
     double delayToStartRecording = 5;
     dispatch_time_t startTime = dispatch_time(DISPATCH_TIME_NOW, delayToStartRecording * NSEC_PER_SEC);

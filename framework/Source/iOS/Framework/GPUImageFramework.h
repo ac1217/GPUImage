@@ -180,5 +180,7 @@ FOUNDATION_EXPORT const unsigned char GPUImageFrameworkVersionString[];
 #import <GPUImage/GPUImageMirrorFilter.h>
 #import <GPUImage/GPUImageGridFilter.h>
 #import <GPUImage/GPUImageTwoInputSplitScreenFilter.h>
+#import <GPUImage/GPUImageSplitScreenFilter.h>
 #import <GPUImage/GPUImageTwoInputGridFilter.h>
+#import <GPUImage/GPUImageWaveFilter.h>
 

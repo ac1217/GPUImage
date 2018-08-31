@@ -40,6 +40,7 @@
 @property (readwrite, nonatomic, assign) id <GPUImageMovieDelegate>delegate;
 
 @property(nonatomic, copy) void(^didCompletePlayingMovieCallback)(void);
+@property(nonatomic, copy) void(^didProcessingCallback)(CMTime frametime, float progress);
 
 @property (readonly, nonatomic) AVAssetReader *assetReader;
 @property (readonly, nonatomic) BOOL audioEncodingIsFinished;

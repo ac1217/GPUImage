@@ -543,6 +543,9 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
 
     processingFrameTime = currentSampleTime;
     [self processMovieFrame:movieFrame withSampleTime:currentSampleTime];
+    
+    !self.didProcessingCallback ? : self.didProcessingCallback(processingFrameTime, self.progress);
+    
 }
 
 - (float)progress
@@ -551,6 +554,7 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
     {
         float current = processingFrameTime.value * 1.0f / processingFrameTime.timescale;
         float duration = self.asset.duration.value * 1.0f / self.asset.duration.timescale;
+        
         return current / duration;
     }
     else if ( AVAssetReaderStatusCompleted == reader.status )

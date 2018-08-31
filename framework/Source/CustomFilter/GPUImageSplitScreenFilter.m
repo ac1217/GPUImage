@@ -1,23 +1,21 @@
 //
-//  GPUImageTwoInputSplitScreenFilter.m
-//  KGSVideoUtilDemo
+//  GPUImageSplitScreenFilter.m
+//  GPUImage
 //
-//  Created by Erica on 2018/8/29.
-//  Copyright © 2018年 Erica. All rights reserved.
+//  Created by Erica on 2018/8/31.
+//  Copyright © 2018年 Brad Larson. All rights reserved.
 //
 
-#import "GPUImageTwoInputSplitScreenFilter.h"
+#import "GPUImageSplitScreenFilter.h"
 
-NSString *const kGPUImageTwoInputSplitScreenFragmentShaderString =  SHADER_STRING
+NSString *const kGPUImageSplitScreenFragmentShaderString =  SHADER_STRING
 (
  
  precision highp float;
  
  varying highp vec2 textureCoordinate;
- varying highp vec2 textureCoordinate2;
  
  uniform sampler2D inputImageTexture;
- uniform sampler2D inputImageTexture2;
  
  uniform lowp float direction;
  uniform lowp float ratio;
@@ -31,8 +29,8 @@ NSString *const kGPUImageTwoInputSplitScreenFragmentShaderString =  SHADER_STRIN
                                        ,textureCoordinate.y);
              gl_FragColor = texture2D(inputImageTexture, newCorrdinate);
          }else{
-             vec2 newCorrdinate = vec2(ratio/2.0+(textureCoordinate2.x-ratio),textureCoordinate2.y);
-             gl_FragColor = texture2D(inputImageTexture2, newCorrdinate);
+             vec2 newCorrdinate = vec2(ratio/2.0+(textureCoordinate.x-ratio),textureCoordinate.y);
+             gl_FragColor = texture2D(inputImageTexture, newCorrdinate);
          }
          
      }else{
@@ -40,25 +38,24 @@ NSString *const kGPUImageTwoInputSplitScreenFragmentShaderString =  SHADER_STRIN
              vec2 newCorrdinate = vec2(textureCoordinate.x,(1.0-ratio)/2.0+textureCoordinate.y);
              gl_FragColor = texture2D(inputImageTexture, newCorrdinate);
          }else{
-             vec2 newCorrdinate = vec2(textureCoordinate2.x,ratio/2.0+(textureCoordinate2.y-ratio));
-             gl_FragColor = texture2D(inputImageTexture2, newCorrdinate);
+             vec2 newCorrdinate = vec2(textureCoordinate.x,ratio/2.0+(textureCoordinate.y-ratio));
+             gl_FragColor = texture2D(inputImageTexture, newCorrdinate);
          }
      }
  }
  );
 
 
-@implementation GPUImageTwoInputSplitScreenFilter
+@implementation GPUImageSplitScreenFilter
 
 - (instancetype)init
 {
-    self = [super initWithFragmentShaderFromString:kGPUImageTwoInputSplitScreenFragmentShaderString];
+    self = [super initWithFragmentShaderFromString:kGPUImageSplitScreenFragmentShaderString];
     if (self) {
         directionUniform = [filterProgram uniformIndex:@"direction"];
         ratioUniform = [filterProgram uniformIndex:@"ratio"];
         self.direction = 0;
         self.ratio = 0.5;
-//        secondFrameCheckDisabled = YES;
     }
     return self;
 }
