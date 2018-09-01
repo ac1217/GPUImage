@@ -65,15 +65,7 @@ NSString *const kGPUImageGridFragmentShaderString = SHADER_STRING
      
  }
  );
-     
-    
-//     lowp float preX = 1.0 / size.x;
-//     lowp float preY = 1.0 / size.y;
-//
-//     lowp float mx = mod(textureCoordinate.x, preX);
-//     lowp float my = mod(textureCoordinate.y, preY);
-//
-//     gl_FragColor = texture2D(inputImageTexture, vec2(mx * size.x, my * size.y));
+
      
      
 @interface GPUImageGridFilter()

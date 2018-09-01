@@ -5,7 +5,7 @@
 @interface SimpleVideoFilterViewController()
 
 @property (nonatomic,strong) GPUImageMovie *movie;
-@property (nonatomic,strong) GPUImageGridFilter *gridFilter;
+@property (nonatomic,strong) GPUImageAstralProjectionFilter *gridFilter;
 @end
 
 @implementation SimpleVideoFilterViewController
@@ -46,15 +46,16 @@
 //    GPUImageSplitScreenFilter *splitScreenFilter = [[GPUImageSplitScreenFilter alloc] init];
 //    splitScreenFilter.ratio = 0.8;
     
-    GPUImageGridFilter *gridFilter = [[GPUImageGridFilter alloc] init];
-    gridFilter.size = CGSizeMake(3, 3);
-    gridFilter.transition = 0.75;
+    GPUImageAstralProjectionFilter *gridFilter = [[GPUImageAstralProjectionFilter alloc] init];
+    
     [videoCamera addTarget:gridFilter];
     self.gridFilter = gridFilter;
     
     GPUImageView *filterView = (GPUImageView *)self.view;
 
     [gridFilter addTarget:filterView];
+    
+    
     
     return;
     

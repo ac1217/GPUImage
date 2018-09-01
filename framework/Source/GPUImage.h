@@ -175,4 +175,5 @@
 #import "GPUImageTwoInputGridFilter.h"
 #import "GPUImageWaveFilter.h"
 #import "GPUImageSplitScreenFilter.h"
+#import "GPUImageAstralProjectionFilter.h"
 

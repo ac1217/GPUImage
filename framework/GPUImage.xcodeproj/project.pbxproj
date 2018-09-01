@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		072897422139A4A000C78788 /* GPUImageAstralProjectionFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 072897402139A4A000C78788 /* GPUImageAstralProjectionFilter.h */; };
+		072897432139A4A000C78788 /* GPUImageAstralProjectionFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 072897412139A4A000C78788 /* GPUImageAstralProjectionFilter.m */; };
 		0797C00C2136439900C8D158 /* GPUImageTwoInputSplitScreenFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0797C00A2136439900C8D158 /* GPUImageTwoInputSplitScreenFilter.h */; };
 		0797C00D2136439900C8D158 /* GPUImageTwoInputSplitScreenFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0797C00A2136439900C8D158 /* GPUImageTwoInputSplitScreenFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0797C00E2136439900C8D158 /* GPUImageTwoInputSplitScreenFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797C00B2136439900C8D158 /* GPUImageTwoInputSplitScreenFilter.m */; };
@@ -742,6 +744,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		072897402139A4A000C78788 /* GPUImageAstralProjectionFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPUImageAstralProjectionFilter.h; sourceTree = "<group>"; };
+		072897412139A4A000C78788 /* GPUImageAstralProjectionFilter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GPUImageAstralProjectionFilter.m; sourceTree = "<group>"; };
 		0797C00A2136439900C8D158 /* GPUImageTwoInputSplitScreenFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImageTwoInputSplitScreenFilter.h; sourceTree = "<group>"; };
 		0797C00B2136439900C8D158 /* GPUImageTwoInputSplitScreenFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageTwoInputSplitScreenFilter.m; sourceTree = "<group>"; };
 		0797C01021364CF200C8D158 /* GPUImageTwoInputGridFilter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GPUImageTwoInputGridFilter.h; sourceTree = "<group>"; };
@@ -1159,6 +1163,8 @@
 				0797C01121364CF200C8D158 /* GPUImageTwoInputGridFilter.m */,
 				0797C06121391E8F00C8D158 /* GPUImageSplitScreenFilter.h */,
 				0797C06221391E8F00C8D158 /* GPUImageSplitScreenFilter.m */,
+				072897402139A4A000C78788 /* GPUImageAstralProjectionFilter.h */,
+				072897412139A4A000C78788 /* GPUImageAstralProjectionFilter.m */,
 			);
 			name = CustomFilter;
 			path = Source/CustomFilter;
@@ -1988,6 +1994,7 @@
 				BCB030BE173400BC001A1A20 /* GPUImageThreeInputFilter.h in Headers */,
 				BCC887CC18A1CEEB008DB37D /* GPUImageFramebuffer.h in Headers */,
 				BCC887D018A1D3AD008DB37D /* GPUImageFramebufferCache.h in Headers */,
+				072897422139A4A000C78788 /* GPUImageAstralProjectionFilter.h in Headers */,
 				574B5D8D1BEA3E5B00F4EC5A /* GPUImageColorConversion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2328,6 +2335,7 @@
 				BCB6B8BC1505BF940041703B /* GPUImageTextureOutput.m in Sources */,
 				BCB6B9051507CA8D0041703B /* GPUImageCropFilter.m in Sources */,
 				83AE9F991540DFE500F7FC13 /* GPUImageSubtractBlendFilter.m in Sources */,
+				072897432139A4A000C78788 /* GPUImageAstralProjectionFilter.m in Sources */,
 				6EE27494150E8FC60040DDB6 /* GPUImageGrayscaleFilter.m in Sources */,
 				BCC94CFB15101EB3002F9BC5 /* GPUImageTransformFilter.m in Sources */,
 				BC54D564151904FF003F4A41 /* GPUImageChromaKeyBlendFilter.m in Sources */,
