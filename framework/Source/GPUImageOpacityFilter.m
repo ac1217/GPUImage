@@ -46,8 +46,12 @@ NSString *const kGPUImageOpacityFragmentShaderString = SHADER_STRING
 		return nil;
     }
     
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
     opacityUniform = [filterProgram uniformIndex:@"opacity"];
     self.opacity = 1.0;
+    
     
     return self;
 }

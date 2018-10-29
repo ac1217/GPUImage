@@ -5,7 +5,7 @@
 @interface SimpleVideoFilterViewController()
 
 @property (nonatomic,strong) GPUImageMovie *movie;
-@property (nonatomic,strong) GPUImageAstralProjectionFilter *gridFilter;
+@property (nonatomic,strong) GPUImageOpacityFilter *gridFilter;
 @end
 
 @implementation SimpleVideoFilterViewController
@@ -46,7 +46,7 @@
 //    GPUImageSplitScreenFilter *splitScreenFilter = [[GPUImageSplitScreenFilter alloc] init];
 //    splitScreenFilter.ratio = 0.8;
     
-    GPUImageAstralProjectionFilter *gridFilter = [[GPUImageAstralProjectionFilter alloc] init];
+    GPUImageOpacityFilter *gridFilter = [[GPUImageOpacityFilter alloc] init];
     
     [videoCamera addTarget:gridFilter];
     self.gridFilter = gridFilter;
@@ -201,7 +201,7 @@
 {
     [(GPUImageSepiaFilter *)filter setIntensity:[(UISlider *)sender value]];
     
-    [self.gridFilter setTransition:[(UISlider *)sender value]];
+    [self.gridFilter setOpacity:[(UISlider *)sender value]];
 }
 
 @end

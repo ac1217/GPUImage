@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		0728973E2136F12A00C78788 /* 57436.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0728973B2136F12900C78788 /* 57436.mp4 */; };
 		0797C0562138E4A200C8D158 /* 58062.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0797C0532138E4A200C8D158 /* 58062.mp4 */; };
-		0797C070213959EB00C8D158 /* GPUImageNxNGridFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0797C06F213959EB00C8D158 /* GPUImageNxNGridFilter.m */; };
 		BCB3C44716BCA8C4003D26B0 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB3C44216BCA8C4003D26B0 /* Icon-72.png */; };
 		BCB3C44816BCA8C4003D26B0 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB3C44316BCA8C4003D26B0 /* Icon-72@2x.png */; };
 		BCB3C44916BCA8C4003D26B0 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BCB3C44416BCA8C4003D26B0 /* Icon.png */; };
@@ -60,8 +59,6 @@
 /* Begin PBXFileReference section */
 		0728973B2136F12900C78788 /* 57436.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 57436.mp4; sourceTree = "<group>"; };
 		0797C0532138E4A200C8D158 /* 58062.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = 58062.mp4; sourceTree = "<group>"; };
-		0797C06E213959EB00C8D158 /* GPUImageNxNGridFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GPUImageNxNGridFilter.h; sourceTree = "<group>"; };
-		0797C06F213959EB00C8D158 /* GPUImageNxNGridFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GPUImageNxNGridFilter.m; sourceTree = "<group>"; };
 		BCB3C44216BCA8C4003D26B0 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "../../SharedIcons/Icon-72.png"; sourceTree = "<group>"; };
 		BCB3C44316BCA8C4003D26B0 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72@2x.png"; path = "../../SharedIcons/Icon-72@2x.png"; sourceTree = "<group>"; };
 		BCB3C44416BCA8C4003D26B0 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = ../../SharedIcons/Icon.png; sourceTree = "<group>"; };
@@ -149,8 +146,6 @@
 		BCB5DDD414E86899000AF3C2 /* SimpleVideoFilter */ = {
 			isa = PBXGroup;
 			children = (
-				0797C06E213959EB00C8D158 /* GPUImageNxNGridFilter.h */,
-				0797C06F213959EB00C8D158 /* GPUImageNxNGridFilter.m */,
 				BCB5DDDD14E86899000AF3C2 /* SimpleVideoFilterAppDelegate.h */,
 				BCB5DDDE14E86899000AF3C2 /* SimpleVideoFilterAppDelegate.m */,
 				BCB5DDE514E868C0000AF3C2 /* SimpleVideoFilterViewController.h */,
@@ -289,7 +284,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCB5DDDB14E86899000AF3C2 /* main.m in Sources */,
-				0797C070213959EB00C8D158 /* GPUImageNxNGridFilter.m in Sources */,
 				BCB5DDDF14E86899000AF3C2 /* SimpleVideoFilterAppDelegate.m in Sources */,
 				BCB5DDE814E868C0000AF3C2 /* SimpleVideoFilterViewController.m in Sources */,
 			);

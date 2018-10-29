@@ -98,6 +98,7 @@ void runAsynchronouslyOnContextQueue(GPUImageContext *context, void (^block)(voi
 #endif
         {
             block();
+            
         }else
         {
             dispatch_async(videoProcessingQueue, block);

@@ -11,18 +11,25 @@
     {
         return nil;
     }
+    
+    [self setTexture:newInputTexture size:newTextureSize];
 
+    return self;
+}
+
+
+- (void)setTexture:(GLuint)newInputTexture size:(CGSize)newTextureSize
+{
+    
     runSynchronouslyOnVideoProcessingQueue(^{
         [GPUImageContext useImageProcessingContext];
     });
     
     textureSize = newTextureSize;
-
+    
     runSynchronouslyOnVideoProcessingQueue(^{
         outputFramebuffer = [[GPUImageFramebuffer alloc] initWithSize:newTextureSize overriddenTexture:newInputTexture];
     });
-    
-    return self;
 }
 
 #pragma mark -

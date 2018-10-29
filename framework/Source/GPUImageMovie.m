@@ -438,7 +438,7 @@ static CVReturn renderCallback(CVDisplayLinkRef displayLink,
     if ([playerItemOutput hasNewPixelBufferForItemTime:outputItemTime]) {
         __unsafe_unretained GPUImageMovie *weakSelf = self;
         CVPixelBufferRef pixelBuffer = [playerItemOutput copyPixelBufferForItemTime:outputItemTime itemTimeForDisplay:NULL];
-        if( pixelBuffer )
+        if( pixelBuffer )\
             runSynchronouslyOnVideoProcessingQueue(^{
                 [weakSelf processMovieFrame:pixelBuffer withSampleTime:outputItemTime];
                 CFRelease(pixelBuffer);

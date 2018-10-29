@@ -176,4 +176,10 @@
 #import "GPUImageWaveFilter.h"
 #import "GPUImageSplitScreenFilter.h"
 #import "GPUImageAstralProjectionFilter.h"
+#import "GPUImageMaskTwoInputFilter.h"
+#import "GPUImage9x9Fliter.h"
+#import "GPUImage4x4Filter.h"
+#import "GPUImageTriangleSplitFilter.h"
+#import "GPUImageNxNGridAlphaTwoInputFilter.h"
+#import "GPUImageTranslationFilter.h"
 

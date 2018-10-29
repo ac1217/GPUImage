@@ -72,7 +72,9 @@
     outputFramebuffer = [[GPUImageContext sharedFramebufferCache] fetchFramebufferForSize:uploadedImageSize textureOptions:self.outputTextureOptions onlyTexture:YES];
     
     glBindTexture(GL_TEXTURE_2D, [outputFramebuffer texture]);
-    glTexImage2D(GL_TEXTURE_2D, 0, _pixelFormat, (int)uploadedImageSize.width, (int)uploadedImageSize.height, 0, (GLint)_pixelFormat, (GLenum)_pixelType, bytesToUpload);
+//    glTexImage2D(GL_TEXTURE_2D, 0, _pixelFormat, (int)uploadedImageSize.width, (int)uploadedImageSize.height, 0, (GLint)_pixelFormat, (GLenum)_pixelType, bytesToUpload);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)uploadedImageSize.width, (int)uploadedImageSize.height, 0, (GLint)GL_BGRA, (GLenum)_pixelType, bytesToUpload);
+    
 }
 
 - (void)updateDataFromBytes:(GLubyte *)bytesToUpload size:(CGSize)imageSize;
@@ -90,7 +92,7 @@
     }
 	
 	runAsynchronouslyOnVideoProcessingQueue(^{
-
+        [GPUImageContext useImageProcessingContext];
 		CGSize pixelSizeOfImage = [self outputImageSize];
     
 		for (id<GPUImageInput> currentTarget in targets)

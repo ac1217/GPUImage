@@ -802,8 +802,8 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
     glFinish();
     
     
-    
     runAsynchronouslyOnContextQueue(_movieWriterContext, ^{
+        
         if (!assetWriterVideoInput.readyForMoreMediaData && _encodingLiveVideo)
         {
             [inputFramebufferForBlock unlock];
@@ -813,6 +813,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         
         // Render the frame with swizzled colors, so that they can be uploaded quickly as BGRA frames
         [_movieWriterContext useAsCurrentContext];
+        
         [self renderAtInternalSizeUsingFramebuffer:inputFramebufferForBlock];
         
         CVPixelBufferRef pixel_buffer = NULL;
@@ -851,12 +852,12 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
             }
             else if(self.assetWriter.status == AVAssetWriterStatusWriting)
             {
+                
                 if (![assetWriterPixelBufferInput appendPixelBuffer:pixel_buffer withPresentationTime:frameTime]) {
                     NSLog(@"Problem appending pixel buffer at time: %@", CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, frameTime)));
-                    
+
                 }else {
                     
-//                    NSLog(@"video TIME = %f", CMTimeGetSeconds(frameTime));
                     previousFrameTime = frameTime;
                 }
                 
@@ -891,6 +892,7 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         
         [inputFramebufferForBlock unlock];
     });
+    
 }
 
 - (NSInteger)nextAvailableTextureIndex;
