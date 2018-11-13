@@ -784,6 +784,8 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
         [firstInputFramebuffer unlock];
         return;
     }
+    
+//    NSLog(@"%f", CMTimeGetSeconds(frameTime));
 
     if (CMTIME_IS_INVALID(startTime))
     {

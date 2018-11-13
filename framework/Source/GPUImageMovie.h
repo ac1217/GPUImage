@@ -14,6 +14,7 @@
  */
 @interface GPUImageMovie : GPUImageOutput
 
+
 @property (readwrite, retain) AVAsset *asset;
 @property (readwrite, retain) AVPlayerItem *playerItem;
 @property(readwrite, retain) NSURL *url;
@@ -62,4 +63,5 @@
 - (void)cancelProcessing;
 - (void)processMovieFrame:(CMSampleBufferRef)movieSampleBuffer; 
 
+//- (void)displayLinkCallback:(CADisplayLink *)sender;
 @end

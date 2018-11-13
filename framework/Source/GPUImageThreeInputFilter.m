@@ -119,9 +119,12 @@ NSString *const kGPUImageThreeInputTextureVertexShaderString = SHADER_STRING
     glVertexAttribPointer(filterThirdTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [[self class] textureCoordinatesForRotation:inputRotation3]);
     
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    [firstInputFramebuffer unlock];
-    [secondInputFramebuffer unlock];
-    [thirdInputFramebuffer unlock];
+        [firstInputFramebuffer unlock];
+    
+        [secondInputFramebuffer unlock];
+    
+        [thirdInputFramebuffer unlock];
+   
     if (usingNextFrameForImageCapture)
     {
         dispatch_semaphore_signal(imageCaptureSemaphore);

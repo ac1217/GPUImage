@@ -163,12 +163,15 @@
 #import "GPUImageSingleComponentGaussianBlurFilter.h"
 #import "GPUImageThreeInputFilter.h"
 #import "GPUImageFourInputFilter.h"
+#import "GPUImageFiveInputFilter.h"
+#import "GPUImageSixInputFilter.h"
 #import "GPUImageWeakPixelInclusionFilter.h"
 #import "GPUImageColorConversion.h"
 #import "GPUImageColourFASTFeatureDetector.h"
 #import "GPUImageColourFASTSamplingOperation.h"
 
 // custom
+#import "GPUImageBeautyFilter.h"
 #import "GPUImageMirrorFilter.h"
 #import "GPUImageGridFilter.h"
 #import "GPUImageTwoInputSplitScreenFilter.h"
