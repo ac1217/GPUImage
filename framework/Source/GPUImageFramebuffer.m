@@ -108,6 +108,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
 
 - (void)dealloc
 {
+    
     [self destroyFramebuffer];
 }
 
@@ -150,6 +151,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
             CFDictionarySetValue(attrs, kCVPixelBufferIOSurfacePropertiesKey, empty);
             
             CVReturn err = CVPixelBufferCreate(kCFAllocatorDefault, (int)_size.width, (int)_size.height, kCVPixelFormatType_32BGRA, attrs, &renderTarget);
+            
             if (err)
             {
                 NSLog(@"FBO size: %f, %f", _size.width, _size.height);
@@ -204,6 +206,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
 - (void)destroyFramebuffer;
 {
     runSynchronouslyOnVideoProcessingQueue(^{
+        
         [GPUImageContext useImageProcessingContext];
         
         if (framebuffer)
@@ -231,9 +234,10 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
         }
         else
         {
+            
             glDeleteTextures(1, &_texture);
         }
-
+        
     });
 }
 
@@ -276,6 +280,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size);
     {
         [[GPUImageContext sharedFramebufferCache] returnFramebufferToCache:self];
     }
+    
 }
 
 - (void)clearAllLocks;
@@ -436,6 +441,7 @@ void dataProviderUnlockCallback (void *info, const void *data, size_t size)
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
     [self lockForReading];
     GLubyte * bufferBytes = CVPixelBufferGetBaseAddress(renderTarget);
+    
     [self unlockAfterReading];
     return bufferBytes;
 #else

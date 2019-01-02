@@ -186,3 +186,6 @@
 #import "GPUImageNxNGridAlphaTwoInputFilter.h"
 #import "GPUImageTranslationFilter.h"
 
+
+#import "GPUImagePixelBufferOutput.h"
+#import "GPUImagePixelBufferInput.h"

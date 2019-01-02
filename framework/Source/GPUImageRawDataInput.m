@@ -2,6 +2,9 @@
 
 @interface GPUImageRawDataInput()
 - (void)uploadBytes:(GLubyte *)bytesToUpload;
+
+
+
 @end
 
 @implementation GPUImageRawDataInput
@@ -66,31 +69,48 @@
 
 - (void)uploadBytes:(GLubyte *)bytesToUpload;
 {
+//    if (!bytesToUpload) {
+//        return;
+//    }
+    
+    
     [GPUImageContext useImageProcessingContext];
+    
 
     // TODO: This probably isn't right, and will need to be corrected
     outputFramebuffer = [[GPUImageContext sharedFramebufferCache] fetchFramebufferForSize:uploadedImageSize textureOptions:self.outputTextureOptions onlyTexture:YES];
-    
+
     glBindTexture(GL_TEXTURE_2D, [outputFramebuffer texture]);
+    
 //    glTexImage2D(GL_TEXTURE_2D, 0, _pixelFormat, (int)uploadedImageSize.width, (int)uploadedImageSize.height, 0, (GLint)_pixelFormat, (GLenum)_pixelType, bytesToUpload);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)uploadedImageSize.width, (int)uploadedImageSize.height, 0, (GLint)GL_BGRA, (GLenum)_pixelType, bytesToUpload);
+    
+//    NSLog(@"%hhu", bytesToUpload[0]);
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (int)uploadedImageSize.width, (int)uploadedImageSize.height, 0, GL_BGRA, (GLenum)_pixelType, bytesToUpload);
+    
+    
     
 }
 
 - (void)updateDataFromBytes:(GLubyte *)bytesToUpload size:(CGSize)imageSize;
 {
     uploadedImageSize = imageSize;
-
+    
     [self uploadBytes:bytesToUpload];
 }
 
 - (void)processData;
 {
+    
+    
 	if (dispatch_semaphore_wait(dataUpdateSemaphore, DISPATCH_TIME_NOW) != 0)
     {
         return;
     }
+    
+    
 	
+    
 	runAsynchronouslyOnVideoProcessingQueue(^{
         [GPUImageContext useImageProcessingContext];
 		CGSize pixelSizeOfImage = [self outputImageSize];
@@ -126,6 +146,7 @@
 			NSInteger textureIndexOfTarget = [[targetTextureIndices objectAtIndex:indexOfObject] integerValue];
             
 			[currentTarget setInputSize:pixelSizeOfImage atIndex:textureIndexOfTarget];
+            [currentTarget setInputFramebuffer:outputFramebuffer atIndex:textureIndexOfTarget];
 			[currentTarget newFrameReadyAtTime:frameTime atIndex:textureIndexOfTarget];
 		}
         

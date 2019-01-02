@@ -86,6 +86,7 @@
 
 - (void)dealloc
 {
+    
     if (_rawBytesForImage != NULL && (![GPUImageContext supportsFastTextureUpload]))
     {
         free(_rawBytesForImage);
@@ -240,6 +241,7 @@
 
 - (GLubyte *)rawBytesForImage;
 {
+    
     if ( (_rawBytesForImage == NULL) && (![GPUImageContext supportsFastTextureUpload]) )
     {
         _rawBytesForImage = (GLubyte *) calloc(imageSize.width * imageSize.height * 4, sizeof(GLubyte));
@@ -248,6 +250,7 @@
 
     if (hasReadFromTheCurrentFrame)
     {
+        
         return _rawBytesForImage;
     }
     else
@@ -262,9 +265,11 @@
             {
                 glFinish();
                 _rawBytesForImage = [outputFramebuffer byteBuffer];
+                
             }
             else
             {
+                
                 glReadPixels(0, 0, imageSize.width, imageSize.height, GL_RGBA, GL_UNSIGNED_BYTE, _rawBytesForImage);
                 // GL_EXT_read_format_bgra
                 //            glReadPixels(0, 0, imageSize.width, imageSize.height, GL_BGRA_EXT, GL_UNSIGNED_BYTE, _rawBytesForImage);

@@ -240,6 +240,7 @@
         //    CGFloat imageAspectRatio = inputImageSize.width / inputImageSize.height;
         //    CGFloat viewAspectRatio = currentViewSize.width / currentViewSize.height;
         
+        
         CGRect insetRect = AVMakeRectWithAspectRatioInsideRect(inputImageSize, self.bounds);
         
         switch(_fillMode)
@@ -393,6 +394,30 @@
     });
 }
 
+//- (void)renderFBO
+//{
+//
+//        [GPUImageContext setActiveShaderProgram:displayProgram];
+//        [self setDisplayFramebuffer];
+//
+//        glClearColor(backgroundColorRed, backgroundColorGreen, backgroundColorBlue, backgroundColorAlpha);
+//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//        glActiveTexture(GL_TEXTURE4);
+//        glBindTexture(GL_TEXTURE_2D, [inputFramebufferForDisplay texture]);
+//        glUniform1i(displayInputTextureUniform, 4);
+//
+//        glVertexAttribPointer(displayPositionAttribute, 2, GL_FLOAT, 0, 0, imageVertices);
+//        glVertexAttribPointer(displayTextureCoordinateAttribute, 2, GL_FLOAT, 0, 0, [GPUImageView textureCoordinatesForRotation:inputRotation]);
+//
+//        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+//
+//        [self presentFramebuffer];
+//        [inputFramebufferForDisplay unlock];
+//        inputFramebufferForDisplay = nil;
+//
+//}
+
 - (NSInteger)nextAvailableTextureIndex;
 {
     return 0;
@@ -459,6 +484,17 @@
 {
     
 }
+
+
+//- (void)clearDisplay
+//{
+//
+//    runSynchronouslyOnVideoProcessingQueue(^{
+//        [self setInputFramebuffer:nil atIndex:0];
+//        [self renderFBO];
+//    });
+//
+//}
 
 #pragma mark -
 #pragma mark Accessors

@@ -1,5 +1,5 @@
 #import "GPUImageLookupFilter.h"
-
+#import "GPUImagePicture.h"
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
 NSString *const kGPUImageLookupFragmentShaderString = SHADER_STRING
 (
@@ -82,6 +82,7 @@ NSString *const kGPUImageLookupFragmentShaderString = SHADER_STRING
 );
 #endif
 
+
 @implementation GPUImageLookupFilter
 
 @synthesize intensity = _intensity;
@@ -111,5 +112,7 @@ NSString *const kGPUImageLookupFragmentShaderString = SHADER_STRING
     
     [self setFloat:_intensity forUniform:intensityUniform program:filterProgram];
 }
+
+
 
 @end

@@ -155,13 +155,17 @@
 //        [framebufferCache setObject:framebuffer forKey:textureHash cost:round(framebufferSize.width * framebufferSize.height * 4.0)];
         [framebufferCache setObject:framebuffer forKey:textureHash];
         [framebufferTypeCounts setObject:[NSNumber numberWithInteger:(numberOfMatchingTextures + 1)] forKey:lookupHash];
+        
+        
     });
 }
 
 - (void)purgeAllUnassignedFramebuffers;
 {
+    
     runAsynchronouslyOnVideoProcessingQueue(^{
 //    dispatch_async(framebufferCacheQueue, ^{
+        
         [framebufferCache removeAllObjects];
         [framebufferTypeCounts removeAllObjects];
 #if TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE

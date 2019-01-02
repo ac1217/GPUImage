@@ -13,6 +13,7 @@
 @property(nonatomic) BOOL enabled;
 
 - (void)doneWithTexture;
+@property(nonatomic, copy) void(^newFrameAvailableBlock)(CMTime frameTime);
 
 @end
 

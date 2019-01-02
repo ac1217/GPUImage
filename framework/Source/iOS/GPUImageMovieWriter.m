@@ -501,7 +501,12 @@ NSString *const kGPUImageColorSwizzlingFragmentShaderString = SHADER_STRING
             {
                 CMSampleBufferInvalidate(audioBuffer);
             }
-            CFRelease(audioBuffer);
+            
+            if (audioBuffer) {
+                
+                CFRelease(audioBuffer);
+            }
+            
         };
 //        runAsynchronouslyOnContextQueue(_movieWriterContext, write);
         if( _encodingLiveVideo )

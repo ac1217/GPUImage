@@ -177,8 +177,6 @@ FOUNDATION_EXPORT const unsigned char GPUImageFrameworkVersionString[];
 #import <GPUImage/GPUImageSolarizeFilter.h>
 #import <GPUImage/GPUImageFiveInputFilter.h>
 #import <GPUImage/GPUImageSixInputFilter.h>
-
-// custom
 #import <GPUImage/GPUImageBeautyFilter.h>
 #import <GPUImage/GPUImageMirrorFilter.h>
 #import <GPUImage/GPUImageGridFilter.h>
@@ -193,3 +191,6 @@ FOUNDATION_EXPORT const unsigned char GPUImageFrameworkVersionString[];
 #import <GPUImage/GPUImage9x9Filter.h>
 #import <GPUImage/GPUImageNxNGridAlphaTwoInputFilter.h>
 #import <GPUImage/GPUImageTranslationFilter.h>
+
+#import <GPUImage/GPUImagePixelBufferOutput.h>
+#import <GPUImage/GPUImagePixelBufferInput.h>

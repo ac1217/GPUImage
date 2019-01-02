@@ -32,6 +32,8 @@
 - (void)newFrameReadyAtTime:(CMTime)frameTime atIndex:(NSInteger)textureIndex;
 {
     [_delegate newFrameReadyFromTextureOutput:self];
+    
+    !self.newFrameAvailableBlock ? : self.newFrameAvailableBlock(frameTime);
 }
 
 - (NSInteger)nextAvailableTextureIndex;

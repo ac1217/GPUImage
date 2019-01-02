@@ -37,5 +37,5 @@ typedef NS_ENUM(NSUInteger, GPUImageFillModeType) {
 - (void)setBackgroundColorRed:(GLfloat)redComponent green:(GLfloat)greenComponent blue:(GLfloat)blueComponent alpha:(GLfloat)alphaComponent;
 
 - (void)setCurrentlyReceivingMonochromeInput:(BOOL)newValue;
-
+//- (void)clearDisplay;
 @end

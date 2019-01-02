@@ -1,6 +1,7 @@
 #import "GPUImageContext.h"
 #import <OpenGLES/EAGLDrawable.h>
 #import <AVFoundation/AVFoundation.h>
+#import <UIKit/UIKit.h>
 
 #define MAXSHADERPROGRAMSALLOWEDINCACHE 40
 
@@ -211,7 +212,9 @@ static void *openGLESContextQueueKey;
 
 - (void)presentBufferForDisplay;
 {
+    
     [self.context presentRenderbuffer:GL_RENDERBUFFER];
+    
 }
 
 - (GLProgram *)programForVertexShaderString:(NSString *)vertexShaderString fragmentShaderString:(NSString *)fragmentShaderString;
