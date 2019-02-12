@@ -30,10 +30,11 @@
 
 @implementation GPUImagePixelBufferOutput
 
-- (void)setVideoSizde:(CGSize)size
-{
-    videoSize = size;
-}
+
+//- (void)setVideoSizde:(CGSize)size
+//{
+//    videoSize = size;
+//}
 
 - (instancetype)init {
     if (self = [super init]) {
@@ -309,6 +310,7 @@
 
 - (void)setInputSize:(CGSize)newSize atIndex:(NSInteger)textureIndex;
 {
+    videoSize = newSize;
 }
 
 - (CGSize)maximumOutputSize;

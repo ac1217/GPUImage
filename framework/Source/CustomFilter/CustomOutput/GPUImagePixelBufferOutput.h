@@ -21,7 +21,7 @@
 }
 
 @property(nonatomic) BOOL enabled;
-- (void)setVideoSizde:(CGSize)size;
+//- (void)setVideoSizde:(CGSize)size;
 
 @property(readonly) CVPixelBufferRef pixelBuffer;
 
